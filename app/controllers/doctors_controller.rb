@@ -3,4 +3,12 @@ class DoctorsController < ApplicationController
 	def dashboard
 
 	end
+
+	def manage_appointments
+
+	end
+
+	def manage_treatments
+
+	end
 end
