@@ -10,10 +10,10 @@ class DoctorsController < ApplicationController
 	end
 
 	def manage_appointments
-
+		@appointments = current_doctor.appointments
 	end
 
 	def manage_treatments
-
+		@completed_appointments = current_doctor.appointments.where(status: 'completed')
 	end
 end

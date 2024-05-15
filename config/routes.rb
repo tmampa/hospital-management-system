@@ -20,6 +20,15 @@ Rails.application.routes.draw do
 
 	# appointment pages
 	post "/appointments/create", to: "appointments#create_appointment"
+	# patch "/appointments/:id/update_status", to: "appointments#update_status"
+
+	resources :appointments do
+		member do
+			patch :update_status
+		end
+	end
+
+	post "/treatments/create_treatment", to: "treatments#create_treatment", as: :treatments_create_treatment
 
 	root "home#index"
 end
