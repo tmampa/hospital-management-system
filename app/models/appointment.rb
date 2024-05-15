@@ -1,13 +1,13 @@
 class Appointment < ApplicationRecord
-  belongs_to :doctor
-  belongs_to :patient
+	belongs_to :doctor
+	belongs_to :patient
+	has_one :treatment, dependent: :destroy
 
-  before_create :default_status
+	before_create :default_status
 
+	private
 
-  private
-
-  def default_status
-    self.status ||= 'pending'
-  end
+	def default_status
+		self.status ||= 'pending'
+	end
 end
