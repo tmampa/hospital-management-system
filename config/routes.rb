@@ -12,5 +12,8 @@ Rails.application.routes.draw do
   # patient pages
     get "/patients/dashboard", to: "patients#dashboard"
 
+  # doctor pages
+    get "/doctors/dashboard", to: "doctors#dashboard"
+
   root "home#index"
 end
