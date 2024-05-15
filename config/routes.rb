@@ -18,5 +18,8 @@ Rails.application.routes.draw do
 	get "/doctors/appointments", to: "doctors#manage_appointments"
 	get "/doctors/treatments", to: "doctors#manage_treatments"
 
+	# appointment pages
+	post "/appointments/create", to: "appointments#create_appointment"
+
 	root "home#index"
 end
