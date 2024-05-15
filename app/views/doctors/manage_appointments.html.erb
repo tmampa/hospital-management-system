@@ -2,5 +2,23 @@
   <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Manage Appointments</h1>
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Here you can view and manage your appointments.</p>
+
+    <% @appointments.each do |appointment| %>
+      <div class="mt-4 bg-white shadow-md rounded-lg p-4">
+        <h2 class="text-xl font-bold text-fuchsia-600 dark:text-fuchsia-400">Appointment
+          with <%= appointment.patient.full_name %></h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Description: <%= appointment.description %></p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Date: <%= appointment.date %></p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Time: <%= appointment.time %></p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Status: <%= appointment.status %></p>
+
+       <%= form_with url: update_status_appointment_path(appointment), method: :patch, class: "mt-4" do |f| %>
+  <div class="flex items-center">
+    <%= f.select :status, options_for_select(['pending', 'confirmed', 'completed', 'cancelled'], appointment.status) %>
+    <%= f.submit 'Update Status', class: 'ml-2 btn btn-primary bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+  </div>
+<% end %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -10,10 +10,10 @@ class DoctorsController < ApplicationController
 	end
 
 	def manage_appointments
-
+		@appointments = current_doctor.appointments
 	end
 
-	def manage_treatments
+		def manage_treatments
 
+		end
 	end
-end

@@ -4,8 +4,6 @@ class Appointment < ApplicationRecord
 
   before_create :default_status
 
-  enum status: %i[pending approved rejected completed]
-
 
   private
 
