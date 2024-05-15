@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :doctors
   devise_for :patients, controllers: {
     sessions: "patients/sessions",
     registrations: "patients/registrations",
