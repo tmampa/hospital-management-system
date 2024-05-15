@@ -1,3 +1,5 @@
+<% @doctors.each do |doctor| %>
+
 <div class="p-4 sm:ml-64">
   <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
     <div>
@@ -9,8 +11,6 @@
     <div>
       <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-200 mt-6 mb-4">Available doctors</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-
-        <% @doctors.each do |doctor| %>
           <div
             class="p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition duration-300 dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
@@ -24,7 +24,6 @@
               Book Appointment
             </button>
           </div>
-        <% end %>
       </div>
     </div>
 
@@ -49,6 +48,7 @@
             </button>
           </div>
           <form action="/appointments/create" method="post" class="p-6 space-y-6">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
             <div>
               <label for="description"
@@ -88,8 +88,8 @@
                        min="09:00" max="18:00" value="00:00" required/>
               </div>
             </div>
-            <input type="hidden" id="doctor_id" name="appointment[doctor_id]">
-            <button type="submit"
+            <input type="hidden" id="doctor_id" name="appointment[doctor_id]" value="<%= doctor.id %>">
+            <button type="submit" data-doctor-id="<%= doctor.id %>"
                     class="w-full text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">Book
               Appointment
             </button>
@@ -109,3 +109,4 @@
     </div>
   </div>
 </div>
+<% end %>

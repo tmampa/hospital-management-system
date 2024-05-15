@@ -1,5 +1,10 @@
 class DoctorsController < ApplicationController
 	layout 'doctor_dashboard'
+
+	def show
+		@doctor = Doctor.find(params[:id])
+	end
+
 	def dashboard
 
 	end
