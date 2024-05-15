@@ -1,15 +1,20 @@
 class TreatmentsController < ApplicationController
+  def create_treatment
+    @appointment = Appointment.find(params[:appointment_id])
+    @treatment = @appointment.treatments.build(treatment_params)
+    @treatment.doctor_id = @appointment.doctor_id
+    @treatment.patient_id = @appointment.patient_id
 
-	def create_treatment
-		@appointment = Appointment.find(params[:appointment_id])
-		@treatment = Treatment.create(treatment_params)
-		redirect_to doctors_treatments_path
-	end
+    if @treatment.save
+      redirect_to doctors_treatments_path
+    else
+      render 'new'
+    end
+  end
 
+  private
 
-	private
-
-	def treatment_params
-		params.require(:treatment).permit(:prescription, :appointment_id, :doctor_id, :diagnosis)
-	end
+  def treatment_params
+    params.require(:treatment).permit(:prescription, :diagnosis)
+  end
 end
