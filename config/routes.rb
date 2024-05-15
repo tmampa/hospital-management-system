@@ -28,5 +28,7 @@ Rails.application.routes.draw do
 		end
 	end
 
+	post "/treatments/create_treatment", to: "treatments#create_treatment", as: :treatments_create_treatment
+
 	root "home#index"
 end
