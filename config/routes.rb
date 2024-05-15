@@ -3,5 +3,10 @@ Rails.application.routes.draw do
     sessions: "patients/sessions",
     registrations: "patients/registrations",
   }
+
+
+  # patient pages
+    get "/patients/dashboard", to: "patients#dashboard"
+
   root "home#index"
 end
