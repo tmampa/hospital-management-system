@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class PatientDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -9,22 +9,18 @@ class PatientDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    first_name: Field::String,
+    last_name: Field::String,
+    gender: Field::String,
+    phone: Field::String,
     address: Field::String,
-    appointments: Field::HasMany,
     doctors: Field::HasMany,
     email: Field::String,
-    encrypted_password: Field::String,
-    first_name: Field::String,
-    gender: Field::String,
-    last_name: Field::String,
-    phone: Field::String,
-    remember_created_at: Field::DateTime,
-    reset_password_sent_at: Field::DateTime,
-    reset_password_token: Field::String,
-    role: Field::String,
-    treatments: Field::HasMany,
+    password: Field::Password,
+    password_confirmation: Field::Password,
+    appointments: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -44,19 +40,12 @@ class PatientDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     address
-    appointments
     doctors
     email
-    encrypted_password
     first_name
     gender
     last_name
     phone
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
-    role
-    treatments
     created_at
     updated_at
   ].freeze
@@ -65,20 +54,15 @@ class PatientDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    address
-    appointments
-    doctors
-    email
-    encrypted_password
     first_name
-    gender
     last_name
+    gender
     phone
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
-    role
-    treatments
+    email
+    address
+    password
+    password_confirmation
+
   ].freeze
 
   # COLLECTION_FILTERS
