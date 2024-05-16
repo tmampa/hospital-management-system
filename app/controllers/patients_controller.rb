@@ -9,6 +9,6 @@ class PatientsController < ApplicationController
 	end
 
 	def treatments
-		# @treatments = current_patient.treatments
+		@treatments = current_patient.treatments
 	end
 end

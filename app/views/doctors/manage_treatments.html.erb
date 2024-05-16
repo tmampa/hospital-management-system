@@ -1,6 +1,52 @@
-<div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
-    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Manage Treatments</h1>
-    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Here you can view and manage your treatments.</p>
+<div class="p-4 sm:ml-64 flex flex-col gap-4">
+  <div class="bg-gray-100 rounded-lg shadow-md p-4 flex flex-col gap-2">
+    <!-- Unchanged -->
   </div>
+
+  <form action="<%= treatments_create_treatment_path %>" method="post" class="bg-white rounded-lg shadow-md p-6">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+    <div class="mb-4">
+      <label for="appointment_id" class="block text-sm font-medium text-gray-700">Appointment:</label>
+      <select name="appointment_id" id="appointment_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+        <% @completed_appointments.each do |appointment| %>
+          <option value="<%= appointment.id %>">Appointment with <%= appointment.patient.full_name %> on <%= appointment.date %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="treatment_prescription" class="block text-sm font-medium text-gray-700">Prescription:</label>
+      <input type="text" name="treatment[prescription]" id="treatment_prescription" placeholder="Enter prescription" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+    </div>
+
+    <div class="mb-4">
+      <label for="treatment_diagnosis" class="block text-sm font-medium text-gray-700">Diagnosis:</label>
+      <input type="text" name="treatment[diagnosis]" id="treatment_diagnosis" placeholder="Enter diagnosis" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
+    </div>
+
+    <button type="submit" class="btn btn-primary bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md">Add Treatment</button>
+  </form>
+
+  <% @completed_appointments.each do |appointment| %>
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">Appointment with <%= appointment.patient.full_name %> on <%= appointment.date %></h2>
+      <table class="w-full">
+        <thead>
+        <tr>
+          <th class="text font-medium text-gray-700 px-2 py-2">Prescription</th>
+          <th class="text font-medium text-gray-700 px-2 py-2">Diagnosis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% appointment.treatments.each do |treatment| %>
+          <tr>
+            <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.prescription %></td>
+            <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.diagnosis %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>
