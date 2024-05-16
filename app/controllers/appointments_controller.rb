@@ -4,7 +4,8 @@ class AppointmentsController < ApplicationController
     if @appointment.save
       redirect_to patients_appointments_path, notice: 'Appointment was successfully created.'
     else
-      render patients_dashboard_path
+      logger.error @appointment.errors.full_messages.join(', ')
+      redirect_to patients_appointments_path, alert: @appointment.errors.full_messages.join(', ')
     end
   end
 
