@@ -1,6 +1,9 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class DoctorDashboard < Administrate::BaseDashboard
+  def display_resource(doctor)
+    "#{doctor.first_name} #{doctor.last_name}"
+  end
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -11,18 +14,16 @@ class DoctorDashboard < Administrate::BaseDashboard
     id: Field::Number,
     appointments: Field::HasMany,
     email: Field::String,
-    encrypted_password: Field::String,
+    password: Field::Password,
+    password_confirmation: Field::Password,
     first_name: Field::String,
     last_name: Field::String,
     patients: Field::HasMany,
     phone: Field::String,
-    remember_created_at: Field::DateTime,
-    reset_password_sent_at: Field::DateTime,
-    reset_password_token: Field::String,
     specialization: Field::String,
     treatments: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,19 +41,12 @@ class DoctorDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    appointments
-    email
-    encrypted_password
     first_name
     last_name
-    patients
+    appointments
+    email
     phone
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
     specialization
-    treatments
     created_at
     updated_at
   ].freeze
@@ -61,18 +55,13 @@ class DoctorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    appointments
-    email
-    encrypted_password
     first_name
     last_name
-    patients
+    email
+    password
+    password_confirmation
     phone
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
     specialization
-    treatments
   ].freeze
 
   # COLLECTION_FILTERS

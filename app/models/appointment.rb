@@ -4,6 +4,7 @@ class Appointment < ApplicationRecord
   has_many :treatments, dependent: :destroy
 
   before_create :default_status
+  
 
   private
 

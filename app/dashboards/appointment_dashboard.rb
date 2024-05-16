@@ -12,7 +12,7 @@ class AppointmentDashboard < Administrate::BaseDashboard
     date: Field::Date,
     description: Field::Text,
     doctor: Field::BelongsTo,
-    patient: Field::BelongsTo,
+    patient: Field::BelongsTo.with_options(class_name: "Patient"),
     status: Field::String,
     time: Field::Time,
     treatments: Field::HasMany,

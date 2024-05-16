@@ -1,6 +1,10 @@
 require 'administrate/base_dashboard'
 
 class PatientDashboard < Administrate::BaseDashboard
+
+  def display_resource(patient)
+    "#{patient.first_name} #{patient.last_name}"
+  end
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
