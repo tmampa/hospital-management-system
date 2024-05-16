@@ -21,6 +21,7 @@ class DoctorDashboard < Administrate::BaseDashboard
     patients: Field::HasMany,
     phone: Field::String,
     specialization: Field::String,
+    encrypted_password: Field::Password,
     treatments: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

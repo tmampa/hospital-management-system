@@ -1,6 +1,12 @@
 require "administrate/base_dashboard"
 
 class TreatmentDashboard < Administrate::BaseDashboard
+
+  def display_resource(treatment)
+    "#{treatment.diagnosis}"
+  end
+
+
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -48,10 +54,10 @@ class TreatmentDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     appointment
-    diagnosis
     doctor
     patient
     prescription
+    diagnosis
   ].freeze
 
   # COLLECTION_FILTERS
