@@ -1,5 +1,3 @@
-# app/controllers/appointments_controller.rb
-
 class AppointmentsController < ApplicationController
   def create_appointment
     @appointment = current_patient.appointments.build(appointment_params)
@@ -17,7 +15,7 @@ class AppointmentsController < ApplicationController
     else
       redirect_to doctors_appointments_path, alert: 'Failed to update appointment status.'
     end
-    end
+  end
 
   private
 
@@ -25,7 +23,7 @@ class AppointmentsController < ApplicationController
     params.require(:appointment).permit(:description, :date, :time, :doctor_id, :status)
   end
 
-  def appointment_params
-    params.require(:appointment).permit(:description, :date, :time, :doctor_id, :status)
-  end
+  # def appointment_params
+  #   params.require(:appointment).permit(:description, :date, :time, :doctor_id, :status)
+  # end
 end
