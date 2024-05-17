@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   def create_appointment
     @appointment = current_patient.appointments.build(appointment_params)
     if @appointment.save
-      redirect_to patients_appointments_path, notice: 'Appointment was successfully created.'
+      redirect_to patients_appointments_path, notice: 'Appointment was successfully booked.'
     else
       logger.error @appointment.errors.full_messages.join(', ')
 
@@ -23,7 +23,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy
-    redirect_to patients_appointments_path, notice: 'Appointment was successfully deleted.'
+    redirect_to patients_appointments_path, notice: 'Appointment was successfully cancelled.'
   end
   private
 
