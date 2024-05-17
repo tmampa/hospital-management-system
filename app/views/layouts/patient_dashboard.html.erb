@@ -18,7 +18,8 @@
 <%= render 'patients/sidebar' %>
 
 <% flash.each do |message_type, message| %>
-  <div id="flash-message" class="fixed top-0 left-0 w-full z-50 p-2 text-sm <%= message_type == 'notice' ? 'bg-green-500' : 'bg-red-500' %> text-white">
+  <div id="flash-message" class="fixed top-0 left-0 w-full z-50 p-2 text-sm <%= message_type == 'notice' ? 'bg-green-500' : 'bg-red-500' %> text-white flex items-center">
+    <div id="loader" class="loader hidden mr-4"></div>
     <%= message %>
   </div>
 <% end %>
@@ -29,10 +30,14 @@
 <script>
     window.setTimeout(function() {
       var flash = document.getElementById('flash-message');
+      var loader = document.getElementById('loader');
       if (flash) {
-        flash.style.display = 'none';
+        loader.style.display = 'block';
+        window.setTimeout(function() {
+          flash.style.display = 'none';
+        }, 3000);
       }
-    }, 4000);
+    }, 0);
 </script>
 
 
