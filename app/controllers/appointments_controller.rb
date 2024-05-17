@@ -5,7 +5,9 @@ class AppointmentsController < ApplicationController
       redirect_to patients_appointments_path, notice: 'Appointment was successfully created.'
     else
       logger.error @appointment.errors.full_messages.join(', ')
-      redirect_to patients_appointments_path, alert: @appointment.errors.full_messages.join(', ')
+
+      redirect_to patients_appointments_path
+      flash[:alert] = @appointment.errors.full_messages.join(', ')
     end
   end
 
