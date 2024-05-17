@@ -1,34 +1,42 @@
 Rails.application.routes.draw do
-	devise_for :doctors, controllers: {
-		sessions: "doctors/sessions",
-		registrations: "doctors/registrations",
-	}
-	devise_for :patients, controllers: {
-		sessions: "patients/sessions",
-		registrations: "patients/registrations",
-	}
+  namespace :admin do
+    resources :appointments
+    resources :doctors
+    resources :patients
+    resources :treatments
 
-	# patient pages
-	get "/patients/dashboard", to: "patients#dashboard"
-    get "/patients/appointments", to: "patients#appointments"
-    get "/patients/treatments", to: "patients#treatments"
+    root to: 'appointments#index'
+  end
+  devise_for :doctors, controllers: {
+    sessions: 'doctors/sessions',
+    registrations: 'doctors/registrations'
+  }
+  devise_for :patients, controllers: {
+    sessions: 'patients/sessions',
+    registrations: 'patients/registrations'
+  }
 
-	# doctor pages
-	get "/doctors/dashboard", to: "doctors#dashboard"
-	get "/doctors/appointments", to: "doctors#manage_appointments"
-	get "/doctors/treatments", to: "doctors#manage_treatments"
+  # patient pages
+  get '/patients/dashboard', to: 'patients#dashboard'
+  get '/patients/appointments', to: 'patients#appointments'
+  get '/patients/treatments', to: 'patients#treatments'
 
-	# appointment pages
-	post "/appointments/create", to: "appointments#create_appointment"
-	# patch "/appointments/:id/update_status", to: "appointments#update_status"
+  # doctor pages
+  get '/doctors/dashboard', to: 'doctors#dashboard'
+  get '/doctors/appointments', to: 'doctors#manage_appointments'
+  get '/doctors/treatments', to: 'doctors#manage_treatments'
 
-	resources :appointments do
-		member do
-			patch :update_status
-		end
-	end
+  # appointment pages
+  post '/appointments/create', to: 'appointments#create_appointment'
+  # patch "/appointments/:id/update_status", to: "appointments#update_status"
 
-	post "/treatments/create_treatment", to: "treatments#create_treatment", as: :treatments_create_treatment
+  resources :appointments do
+    member do
+      patch :update_status
+    end
+  end
 
-	root "home#index"
+  post '/treatments/create_treatment', to: 'treatments#create_treatment', as: :treatments_create_treatment
+
+  root 'home#index'
 end
