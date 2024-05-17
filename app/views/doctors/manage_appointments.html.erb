@@ -14,7 +14,7 @@
 
        <%= form_with url: update_status_appointment_path(appointment), method: :patch, class: "mt-4" do |f| %>
   <div class="flex items-center">
-    <%= f.select :status, options_for_select(['pending', 'confirmed', 'completed', 'cancelled'], appointment.status) %>
+    <%= f.select :status, options_for_select(['confirmed', 'completed', 'rejected'], appointment.status) %>
     <%= f.submit 'Update Status', class: 'ml-2 btn btn-primary bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
   </div>
 <% end %>

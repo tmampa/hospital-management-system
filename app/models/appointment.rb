@@ -3,7 +3,7 @@ class Appointment < ApplicationRecord
   belongs_to :patient
   has_many :treatments, dependent: :destroy
 
-  validate :doctor_is_not_booked
+  validate :doctor_is_not_booked, unless: :status_changed?
 
   before_create :default_status
 
