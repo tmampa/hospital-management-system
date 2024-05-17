@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   # appointment pages
   post '/appointments/create', to: 'appointments#create_appointment'
+  delete '/appointments/:id', to: 'appointments#destroy'
   # patch "/appointments/:id/update_status", to: "appointments#update_status"
 
   resources :appointments do

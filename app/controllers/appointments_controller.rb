@@ -18,6 +18,11 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def destroy
+    @appointment = Appointment.find(params[:id])
+    @appointment.destroy
+    redirect_to patients_appointments_path, notice: 'Appointment was successfully deleted.'
+  end
   private
 
   def appointment_params
