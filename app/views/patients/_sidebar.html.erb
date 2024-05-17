@@ -6,25 +6,31 @@
       <li>
         <a href="/patients/dashboard"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
+            <i class="fa-solid fa-table-columns text-lg"></i>
           <span class="ms-3">Dashboard</span>
         </a>
       </li>
       <li>
         <a href="/patients/appointments"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
+            <i class="fa-regular fa-calendar-check text-lg"></i>
           <span class="flex-1 ms-3 whitespace-nowrap">Appointments</span>
         </a>
       </li>
       <li>
         <a href="/patients/treatments"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <i class="fa-solid fa-kit-medical"></i>
           <span class="flex-1 ms-3 whitespace-nowrap">Treatments</span>
         </a>
       </li>
+      <li>
+         <%= link_to destroy_patient_session_path, method: :delete do %>
+            <i class="fas fa-sign-out-alt"></i> Sign out
+         <% end %>
+      </li>
 
-      <%= link_to 'Sign out', destroy_patient_session_path, method: :delete %>
+
 
       <!-- <li>
           <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
