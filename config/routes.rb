@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/patients/dashboard', to: 'patients#dashboard'
   get '/patients/appointments', to: 'patients#appointments'
   get '/patients/treatments', to: 'patients#treatments'
+  get '/patients/payments', to: 'patients#payments'
 
   # doctor pages
   get '/doctors/dashboard', to: 'doctors#dashboard'
@@ -39,5 +40,8 @@ Rails.application.routes.draw do
 
   post '/treatments/create_treatment', to: 'treatments#create_treatment', as: :treatments_create_treatment
 
+  resources :treatments do
+    resources :payments, only: [:new, :create]
+  end
   root 'home#index'
 end

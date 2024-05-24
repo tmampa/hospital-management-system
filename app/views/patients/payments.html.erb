@@ -1,0 +1,28 @@
+<div class="p-4 sm:ml-64">
+  <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Payments</h1>
+    </div>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Here are the payments you have made.</p>
+
+    <h1>All Payments by <%= @patient.full_name %></h1>
+
+<table>
+  <tr>
+    <th>Treatment ID</th>
+    <th>Amount</th>
+    <th>Payment Method</th>
+    <th>Date</th>
+  </tr>
+
+  <% @payments.each do |payment| %>
+    <tr>
+      <td><%= payment.treatment_id %></td>
+      <td><%= payment.amount %></td>
+      <td><%= payment.payment_method %></td>
+      <td><%= payment.date %></td>
+    </tr>
+  <% end %>
+</table>
+  </div>
+</div>
