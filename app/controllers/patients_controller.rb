@@ -11,4 +11,8 @@ class PatientsController < ApplicationController
 	def treatments
 		@treatments = current_patient.treatments
 	end
+
+  def payments
+		@payments = current_patient.payments
+	end
 end
