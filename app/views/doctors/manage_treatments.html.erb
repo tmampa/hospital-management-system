@@ -1,6 +1,5 @@
 <div class="p-4 sm:ml-64 flex flex-col gap-4">
   <div class="bg-gray-100 rounded-lg shadow-md p-4 flex flex-col gap-2">
-    <!-- Unchanged -->
   </div>
 
   <form action="<%= treatments_create_treatment_path %>" method="post" class="bg-white rounded-lg shadow-md p-6">
@@ -29,24 +28,32 @@
   </form>
 
   <% @completed_appointments.each do |appointment| %>
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <h2 class="text-xl font-semibold text-gray-900 mb-4">Appointment with <%= appointment.patient.full_name %> on <%= appointment.date %></h2>
-      <table class="w-full">
-        <thead>
+  <div class="bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Appointment with <%= appointment.patient.full_name %> on <%= appointment.date %></h2>
+    <table class="w-full">
+      <thead>
+      <tr>
+        <th class="text font-medium text-gray-700 px-2 py-2">Prescription</th>
+        <th class="text font-medium text-gray-700 px-2 py-2">Diagnosis</th>
+        <th class="text font-medium text-gray-700 px-2 py-2">Payment Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% appointment.treatments.each do |treatment| %>
         <tr>
-          <th class="text font-medium text-gray-700 px-2 py-2">Prescription</th>
-          <th class="text font-medium text-gray-700 px-2 py-2">Diagnosis</th>
+          <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.prescription %></td>
+          <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.diagnosis %></td>
+          <td class="text-sm text-gray-600 px-2 py-2 text-center">
+            <% if treatment.payment.nil? %>
+              Not Paid
+            <% else %>
+              Paid
+            <% end %>
+          </td>
         </tr>
-        </thead>
-        <tbody>
-        <% appointment.treatments.each do |treatment| %>
-          <tr>
-            <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.prescription %></td>
-            <td class="text-sm text-gray-600 px-2 py-2 text-center"><%= treatment.diagnosis %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 </div>
