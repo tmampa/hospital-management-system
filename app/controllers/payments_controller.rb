@@ -18,7 +18,7 @@ class PaymentsController < ApplicationController
       flash[:error] = @payment.errors.full_messages.join(', ')
       render :new
     else
-      redirect_to patients_dashboard_path
+      redirect_to patients_treatments_path
     end
   end
 
