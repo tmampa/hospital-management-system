@@ -10,7 +10,7 @@ class TreatmentsController < ApplicationController
     else
       render 'new'
     end
-  end
+  end 
 
   private
 

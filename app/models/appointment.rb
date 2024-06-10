@@ -4,6 +4,7 @@ class Appointment < ApplicationRecord
   has_many :treatments, dependent: :destroy
 
   validate :doctor_is_not_booked, unless: :status_changed?
+  validate :date_can_not_be_in_the_past
 
   before_create :default_status
 
@@ -18,5 +19,11 @@ class Appointment < ApplicationRecord
 
   def default_status
     self.status ||= 'pending'
+  end
+
+  def date_can_not_be_in_the_past
+    if date.present? && date < Date.today
+      errors.add(:date, "can't be in the past")
+    end
   end
 end
