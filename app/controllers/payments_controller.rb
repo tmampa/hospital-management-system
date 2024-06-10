@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+
+  layout 'patient_dashboard'
   def new
     @treatment = Treatment.find(params[:treatment_id])
     @payment = Payment.new

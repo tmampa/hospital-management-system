@@ -3,6 +3,7 @@ class DoctorsController < ApplicationController
 
 	def show
 		@doctor = Doctor.find(params[:id])
+		@average_rating = @doctor.average_rating
 	end
 
 	def dashboard

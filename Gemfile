@@ -68,3 +68,5 @@ end
 
 gem 'administrate'
 gem 'devise'
+
+gem "prawn", "~> 2.5"

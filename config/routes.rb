@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/patients/appointments', to: 'patients#appointments'
   get '/patients/treatments', to: 'patients#treatments'
   get '/patients/payments', to: 'patients#payments'
+  get '/patients/treatments/:id/export_pdf', to: 'patients#export_treatments_pdf', as: 'export_treatment_pdf'
 
   # doctor pages
   get '/doctors/dashboard', to: 'doctors#dashboard'
@@ -43,5 +44,7 @@ Rails.application.routes.draw do
   resources :treatments do
     resources :payments, only: [:new, :create]
   end
+
+  resources :ratings
   root 'home#index'
 end

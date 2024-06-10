@@ -11,7 +11,11 @@
           <p class="mt-2 text-sm text-red-600 dark:text-red-400">Payment: Not Paid</p>
           <%= button_to 'Make Payment', new_treatment_payment_path(treatment), method: :get, class: 'mt-4 bg-fuchsia-500 hover:bg-fuchsia-700 text-white font-bold py-2 px-4 rounded-full' %>
         <% else %>
-          <p class="mt-2 text-sm text-green-600 dark:text-green-400">Payment: Paid</p>
+          <div class="flex justify-between items-center">
+            <p class="my-4 text-sm text-green-600 dark:text-green-400">Payment: Paid</p>
+
+            <a href="<%= export_treatment_pdf_path(treatment) %>" class="text-right bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">Export Treatments as PDF</a>
+          </div>
         <% end %>
       </div>
     <% end %>

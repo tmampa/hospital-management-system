@@ -8,6 +8,7 @@ class Patient < ApplicationRecord
 	has_many :doctors, through: :appointments
 	has_many :treatments, dependent: :destroy
 	has_many :payments, through: :treatments
+	has_many :ratings, dependent: :destroy
 
 	def full_name
 		"#{first_name} #{last_name}"
