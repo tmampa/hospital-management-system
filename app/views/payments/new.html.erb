@@ -1,24 +1,67 @@
-<%= render 'patients/topnav' %>
-<%= render 'patients/sidebar' %>
-
 <div class="p-4 sm:ml-64">
   <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
-<h1>New Payment</h1>
 
-<%= form_with(model: [@treatment, @payment], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.number_field :amount, step: 0.01 %>
-  </div>
+    <%= form_with(model: [@treatment, @payment], local: true) do |form| %>
+      <div class="field">
+        <%= form.label :amount %>
+        <%= form.number_field :amount, step: 0.01 %>
+      </div>
 
-  <div class="field">
-    <%= form.label :payment_method %>
-    <%= form.select :payment_method, ['Credit Card', 'Debit Card', 'Cash', 'Bank Transfer'], {}, class: 'form-control' %>
-  </div>
+      <div class="field">
+        <%= form.label :payment_method %>
+        <%= form.select :payment_method, ['Select payment method', 'Credit Card', 'Medical Aid'], {}, class: 'form-control', id: 'payment_method' %>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+      <div id="credit_card_fields" style="display: none;">
+        <div class="field">
+          <%= form.label :card_number %>
+          <%= form.text_field :card_number %>
+        </div>
+
+        <div class="field">
+          <%= form.label :expiry_date %>
+          <%= form.date_select :expiry_date %>
+        </div>
+
+        <div class="field">
+          <%= form.label :cvv %>
+          <%= form.number_field :cvv %>
+        </div>
+      </div>
+
+      <div id="medical_aid_fields" style="display: none;">
+        <div class="field">
+          <%= form.label :medical_aid_provider %>
+          <%= form.text_field :medical_aid_provider %>
+        </div>
+
+        <div class="field">
+          <%= form.label :medical_aid_number %>
+          <%= form.text_field :medical_aid_number %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var paymentMethod = document.getElementById('payment_method');
+        var creditCardFields = document.getElementById('credit_card_fields');
+        var medicalAidFields = document.getElementById('medical_aid_fields');
+
+        paymentMethod.addEventListener('change', function () {
+            if (paymentMethod.value == 'Credit Card') {
+                creditCardFields.style.display = 'block';
+                medicalAidFields.style.display = 'none';
+            } else if (paymentMethod.value == 'Medical Aid') {
+                creditCardFields.style.display = 'none';
+                medicalAidFields.style.display = 'block';
+            }
+        });
+    });
+</script>
