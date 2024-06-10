@@ -7,6 +7,11 @@ class Doctor < ApplicationRecord
 	has_many :appointments, dependent: :destroy
 	has_many :patients, through: :appointments
 	has_many :treatments, dependent: :destroy
+	has_many :ratings, dependent: :destroy
+
+	def average_rating
+		ratings.average(:score).round(2)
+	end
 
 	def full_name
 		"#{first_name} #{last_name}"

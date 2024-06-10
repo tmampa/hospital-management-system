@@ -43,5 +43,7 @@ Rails.application.routes.draw do
   resources :treatments do
     resources :payments, only: [:new, :create]
   end
+
+  resources :ratings
   root 'home#index'
 end

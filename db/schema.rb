@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_030724) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_091949) do
   create_table "appointments", force: :cascade do |t|
     t.integer "doctor_id", null: false
     t.integer "patient_id", null: false
@@ -69,6 +69,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_030724) do
     t.index ["treatment_id"], name: "index_payments_on_treatment_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score"
+    t.integer "doctor_id", null: false
+    t.integer "patient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_ratings_on_doctor_id"
+    t.index ["patient_id"], name: "index_ratings_on_patient_id"
+  end
+
   create_table "treatments", force: :cascade do |t|
     t.text "prescription"
     t.text "diagnosis"
@@ -85,6 +95,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_030724) do
   add_foreign_key "appointments", "doctors"
   add_foreign_key "appointments", "patients"
   add_foreign_key "payments", "treatments"
+  add_foreign_key "ratings", "doctors"
+  add_foreign_key "ratings", "patients"
   add_foreign_key "treatments", "appointments"
   add_foreign_key "treatments", "doctors"
   add_foreign_key "treatments", "patients"
