@@ -1,138 +1,326 @@
+<div>
+  <h2 class="text-5xl font-semibold text-gray-700 pb-2">
+    <%= @patient.full_name %>'s
+    Dashboard
+  </h2>
+</div>
+<div>
+  <p class="text-gray-700 text-sm pb-4">Welcome to your dashboard. Here you can view your appointments,
+    prescriptions, and other important information.</p>
+</div>
+<div>
+  <%#= form_with(url: "/patients/dashboard", method: "get", local: true) do |form| %>
+  <%#= form.label :search, "Search for doctors:" %>
+  <%#= form.text_field :search, value: params[:search] %>
+  <%#= form.submit "Search" %>
+  <%# end %>
 
 
-<div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
-    <div>
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-200">Dashboard</h2>
+
+
+
+  <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mt-6 mb-4">All doctors:</h3>
+  <!--  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">-->
+  <%# @doctors.each do |doctor| %>
+  <!--      <div-->
+  <!--        class="p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition duration-300 dark:bg-gray-800 dark:border-gray-700">-->
+  <!--        <a href="#">-->
+  <!--          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%#= doctor.full_name %></h5>-->
+  <!--        </a>-->
+  <!--        <p class="py-2 dark:text-white text-semibold">Rating: <%#= doctor.average_rating %></p>-->
+  <!--        <p class="mb-2 font-normal text-gray-700 dark:text-gray-400"><%#= doctor.specialization %></p>-->
+  <!--        <p class="mb-2 font-normal text-gray-700 dark:text-gray-400"><%#= doctor.phone %></p>-->
+  <!--        <p class="mb-4 font-normal text-gray-700 dark:text-gray-400"><%#= doctor.email %></p>-->
+  <!--        <div class="py-4">-->
+  <%#= form_for Rating.new, url: ratings_path, html: { class: 'rating-form' } do |f| %>
+  <%#= f.hidden_field :doctor_id, value: doctor.id %>
+
+  <!--            <div class="mb-4">-->
+  <%#= f.label :score, 'Rate the Doctor:', class: 'block text-sm font-medium text-gray-700' %>
+  <%#= f.number_field :score, in: 1..5, step: 1, class: 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm' %>
+  <!--            </div>-->
+
+  <!--            <div>-->
+  <%#= f.submit 'Rate', class: 'inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500' %>
+  <!--            </div>-->
+  <%# end %>
+  <!--        </div>-->
+
+  <!--        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-doctor-id="<%#= doctor.id %>"-->
+  <!--                class="w-full text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">-->
+  <!--          Book Appointment-->
+  <!--        </button>-->
+
+  <!--      </div>-->
+  <%# end %>
+  <!--  </div>-->
+
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="py-4">
+      <%= form_with(url: "/patients/dashboard", method: "get", local: true, html: { class: "max-w-md mx-auto" }) do |form| %>
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+          </div>
+          <%= form.text_field :search, value: params[:search], id: "default-search", class: "block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500", placeholder: "Search Doctors...", required: true %>
+          <%= form.submit "Search", class: "text-white absolute end-2.5 bottom-2.5 bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2" %>
+        </div>
+      <% end %>
     </div>
-    <div>
-      <p class="text-gray-700 dark:text-gray-400">Welcome to your dashboard. Here you can view your appointments, prescriptions, and other important information.</p>
-    </div>
-    <div>
-      <%= form_with(url: "/patients/dashboard", method: "get", local: true) do |form| %>
-  <%= form.label :search, "Search for doctors:" %>
-  <%= form.text_field :search, value: params[:search] %>
-  <%= form.submit "Search" %>
-<% end %>
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-200 mt-6 mb-4">Available doctors</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Name
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Specialization
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Email
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Phone
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Rating
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Action
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% if @doctors.empty? %>
+        <tr>
+          <td colspan="6" class="text-center py-4">No doctors found.</td>
+        </tr>
+      <% else %>
         <% @doctors.each do |doctor| %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+              <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
+              <div class="ps-3">
+                <div class="text-base font-semibold">
+                  <%= doctor.first_name %> <%= doctor.last_name %>
+                </div>
+              </div>
+            </th>
+            <td class="px-6 py-4">
+              <%= doctor.specialization %>
+            </td>
+            <td class="px-6 py-4">
+              <%= doctor.email %>
+            </td>
+            <td class="px-6 py-4">
+              <%= doctor.phone %>
+            </td>
+            <td class="px-6 py-4">
+              <%= doctor.average_rating %>
+            </td>
+            <td class="px-6 py-4">
+              <!-- Modal toggle -->
+              <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-doctor-id="<%= doctor.id %>"
+                      class="text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">
+                Book Appointment
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <!-- Edit user modal -->
+    <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Edit user
+            </h3>
+            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUserModal">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="p-6 space-y-6">
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+                  Name</label>
+                <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bonnie" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                  Name</label>
+                <input type="text" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Green" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@company.com" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+                  Number</label>
+                <input type="number" name="phone-number" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="e.g. +(12)3456 789" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                <input type="text" name="department" id="department" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Development" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
+                <input type="number" name="company" id="company" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123456" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current
+                  Password</label>
+                <input type="password" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
+              </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="new-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New
+                  Password</label>
+                <input type="password" name="new-password" id="new-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save
+              all
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="bg-gray-50 p-4 mt-8 rounded">
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">Upcoming Appointments:</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <% if @appointments.empty? %>
+        <p>No upcoming appointments.</p>
+      <% else %>
+        <% @appointments.each do |appointment| %>
           <div
             class="p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition duration-300 dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= doctor.full_name %></h5>
+              <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= appointment.doctor.full_name %></h5>
             </a>
-            <p class="py-2 dark:text-white text-semibold">Rating: <%= doctor.average_rating %></p>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400"><%= doctor.specialization %></p>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400"><%= doctor.phone %></p>
-            <p class="mb-4 font-normal text-gray-700 dark:text-gray-400"><%= doctor.email %></p>
-            <div>
-              <%= form_for Rating.new, url: ratings_path do |f| %>
-                <%= f.hidden_field :doctor_id, value: doctor.id %>
-                <%= f.number_field :score, in: 1..5, step: 1 %>
-                <%= f.submit 'Rate' %>
-              <% end %>
-            </div>
-            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-doctor-id="<%= doctor.id %>"
-                    class="w-full text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">
-              Book Appointment
-            </button>
-
+            <p class="py-2 dark:text-white text-semibold">Date: <%= appointment.date %></p>
+            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Time: <%= appointment.time %></p>
+            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Description: <%= appointment.description %></p>
+            <p class="mb-4 font-normal text-gray-700 dark:text-gray-400">Status: <%= appointment.status %></p>
           </div>
         <% end %>
-          </div>
+      <% end %>
+    </div>
+  </div>
 
-          </div>
-        <div id="crud-modal" data-modal-target="crud-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-          <div class="relative w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  Book Appointment
-                </h3>
-                <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="crud-modal">
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                       xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="sr-only">Close modal</span>
-                </button>
-              </div>
-              <form action="/appointments/create" method="post" class="p-6 space-y-6">
-                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+</div>
+<div id="crud-modal" data-modal-target="crud-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative w-full max-w-md max-h-full">
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          Book Appointment
+        </h3>
+        <button type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="crud-modal">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <form action="/appointments/create" method="post" class="p-6 space-y-6">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-                <div>
-                  <label for="description"
-                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <textarea id="description" rows="3" name="appointment[description]"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-fuchsia-500 focus:border-fuchsia-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
-                            placeholder="Enter a description..."></textarea>
-                </div>
-                <div>
+        <div>
+          <label for="description"
+                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+          <textarea id="description" rows="3" name="appointment[description]"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-fuchsia-500 focus:border-fuchsia-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
+                    placeholder="Enter a description..."></textarea>
+        </div>
+        <div>
 
-                  <div class="relative max-w-sm">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                           xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                      </svg>
-                    </div>
-                    <input type="date" name="appointment[date]" id="date"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
-                           placeholder="Select date">
-                  </div>
-                </div>
-                <div>
-                  <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
-                    time:</label>
-                  <div class="relative">
-                    <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                           xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd"
-                              d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                              clip-rule="evenodd"/>
-                      </svg>
-                    </div>
-                    <input type="time" id="time" name="appointment[time]"
-                           class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
-                           min="09:00" max="18:00" value="00:00" required/>
-                  </div>
-                </div>
-                <input type="hidden" id="doctor_id" name="appointment[doctor_id]" >
-                <button type="submit"
-                        class="w-full text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">Book
-                  Appointment
-                </button>
-              </form>
+          <div class="relative max-w-sm">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+              </svg>
             </div>
+            <input type="date" name="appointment[date]" id="date"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
+                   placeholder="Select date">
           </div>
         </div>
-
-        <div class="mt-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-4">Additional Information</h3>
-          <p class="text-gray-700 dark:text-gray-400">Here you can find additional information about our clinic, services, and policies.</p>
-          <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-500 dark:text-gray-400">
-            <li>Our clinic is open from 9 AM to 6 PM, Monday through Friday.</li>
-            <li>We accept most major insurance plans.</li>
-            <li>Please bring your insurance card and a valid photo ID to your appointment.</li>
-          </ul>
+        <div>
+          <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+            time:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                      d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <input type="time" id="time" name="appointment[time]"
+                   class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-fuchsia-500 focus:border-fuchsia-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-fuchsia-500 dark:focus:border-fuchsia-500"
+                   min="09:00" max="18:00" value="00:00" required/>
+          </div>
         </div>
-        </div>
+        <input type="hidden" id="doctor_id" name="appointment[doctor_id]">
+        <button type="submit"
+                class="w-full text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">Book
+          Appointment
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
 
+<div class="mt-8">
+  <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-4">Additional Information</h3>
+  <p class="text-gray-700 dark:text-gray-400">Here you can find additional information about our clinic, services, and
+    policies.</p>
+  <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-500 dark:text-gray-400">
+    <li>Our clinic is open from 9 AM to 6 PM, Monday through Friday.</li>
+    <li>We accept most major insurance plans.</li>
+    <li>Please bring your insurance card and a valid photo ID to your appointment.</li>
+  </ul>
+</div>
+
+
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         let buttons = document.querySelectorAll('button[data-doctor-id]');
         let doctorIdInput = document.getElementById('doctor_id');
-        buttons.forEach(function(button) {
-            button.addEventListener('click', function() {
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function () {
                 let doctorId = button.getAttribute('data-doctor-id');
                 doctorIdInput.value = doctorId;
             });
