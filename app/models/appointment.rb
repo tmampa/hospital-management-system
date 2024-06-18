@@ -26,4 +26,8 @@ class Appointment < ApplicationRecord
       errors.add(:date, "can't be in the past")
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "date", "description", "doctor_id", "id", "id_value", "patient_id", "status", "time", "updated_at"]
+  end
 end
