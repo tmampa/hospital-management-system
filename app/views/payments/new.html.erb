@@ -1,52 +1,53 @@
-<div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
+<h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-700">Payments</h1>
+<h3 class="text-lg text-gray-900 dark:text-gray-500 py-4">Make your payment</h3>
 
-    <%= form_with(model: [@treatment, @payment], local: true) do |form| %>
+<%= form_with(model: [@treatment, @payment], local: true) do |form| %>
+  <div class="space-y-4 w-fit p-4 shadow">
+    <div class="field">
+      <%= form.label :amount %>
+      <%= form.number_field :amount, step: 0.01 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :payment_method, class: "block mb-2 text-sm font-medium text-gray-900"%>
+      <%= form.select :payment_method, ['Select payment method', 'Credit Card', 'Medical Aid'], {}, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5', id: 'payment_method' %>
+    </div>
+
+    <div id="credit_card_fields" style="display: none;">
       <div class="field">
-        <%= form.label :amount %>
-        <%= form.number_field :amount, step: 0.01 %>
+        <%= form.label :card_number %>
+        <%= form.text_field :card_number %>
       </div>
 
       <div class="field">
-        <%= form.label :payment_method %>
-        <%= form.select :payment_method, ['Select payment method', 'Credit Card', 'Medical Aid'], {}, class: 'form-control', id: 'payment_method' %>
+        <%= form.label :expiry_date %>
+        <%= form.date_select :expiry_date %>
       </div>
 
-      <div id="credit_card_fields" style="display: none;">
-        <div class="field">
-          <%= form.label :card_number %>
-          <%= form.text_field :card_number %>
-        </div>
+      <div class="field">
+        <%= form.label :cvv %>
+        <%= form.number_field :cvv %>
+      </div>
+    </div>
 
-        <div class="field">
-          <%= form.label :expiry_date %>
-          <%= form.date_select :expiry_date %>
-        </div>
-
-        <div class="field">
-          <%= form.label :cvv %>
-          <%= form.number_field :cvv %>
-        </div>
+    <div id="medical_aid_fields" style="display: none;">
+      <div class="field">
+        <%= form.label :medical_aid_provider %>
+        <%= form.text_field :medical_aid_provider %>
       </div>
 
-      <div id="medical_aid_fields" style="display: none;">
-        <div class="field">
-          <%= form.label :medical_aid_provider %>
-          <%= form.text_field :medical_aid_provider %>
-        </div>
-
-        <div class="field">
-          <%= form.label :medical_aid_number %>
-          <%= form.text_field :medical_aid_number %>
-        </div>
+      <div class="field">
+        <%= form.label :medical_aid_number %>
+        <%= form.text_field :medical_aid_number %>
       </div>
+    </div>
 
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %>
+    <div class="actions">
+      <%= form.submit%>
+    </div>
   </div>
-</div>
+
+<% end %>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
