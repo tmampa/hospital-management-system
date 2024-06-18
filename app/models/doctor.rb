@@ -10,7 +10,7 @@ class Doctor < ApplicationRecord
 	has_many :ratings, dependent: :destroy
 
 	def average_rating
-		ratings.average(:score).round(2)
+		ratings.average(:score)
 	end
 
 	def full_name
