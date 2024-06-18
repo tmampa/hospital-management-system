@@ -15,6 +15,8 @@ class PatientsController < ApplicationController
 
 	def appointments
 		@appointments = current_patient.appointments
+		@past_appointments = current_patient.appointments.where(status: 'completed')
+		@upcoming_appointments = current_patient.appointments.where.not(status: 'completed')
 	end
 
 	def treatments

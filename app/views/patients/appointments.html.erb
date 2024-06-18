@@ -1,16 +1,49 @@
+<h1 class="text-4xl font-bold text-gray-700">Appointments</h1>
 
+<p class="text-sm text-gray-500 dark:text-gray-400 py-2">Manage your appointments here.</p>
 
-    <h1 class="text-2xl font-bold text-fuchsia-600 dark:text-fuchsia-400">Appointments</h1>
+<div>
+  <h3 class="text-xl font-semibold text-gray-900 mt-6 mb-4">Upcoming:</h3>
+  <div class="flex space-x-4">
+    <% if @upcoming_appointments.empty? %>
+      <p class=" text-gray-500 dark:text-gray-400">You have no upcoming appointments.</p>
+    <% else %>
+      <% @upcoming_appointments.each do |upcoming| %>
+        <div class="mt-4 bg-white shadow-md rounded-lg p-4 w-fit">
 
-    <p class="text-sm text-gray-500 dark:text-gray-400">Manage your appointments here.</p>
+          <h2 class="text-xl font-bold text-fuchsia-600 dark:text-fuchsia-400">Appointment with
+            Dr. <%= upcoming.doctor.full_name %></h2>
 
+          <p class="text-sm text-gray-500 dark:text-gray-400">Description: <%= upcoming.description %></p>
 
+          <p class="text-sm text-gray-500 dark:text-gray-400">Date: <%= upcoming.date %></p>
 
-    <% @appointments.each do |appointment| %>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Time: <%= upcoming.time.strftime("%H:%M") %></p>
+
+          <p class="text-sm text-gray-500 dark:text-gray-400">Status: <%= upcoming.status %></p>
+
+          <%= form_with url: appointment_path(upcoming), method: :delete, local: true, class: "inline-block" do |form| %>
+            <%= form.submit "Cancel Appointment", class: "inline-block bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 mt-4 rounded" %>
+          <% end %>
+
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded p-4 mt-8">
+  <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-4">Past:</h3>
+  <% if @past_appointments.empty? %>
+    <p class=" text-gray-500 dark:text-gray-400">You have no past appointments.</p>
+
+  <% else %>
+    <% @past_appointments.each do |appointment| %>
 
       <div class="mt-4 bg-white shadow-md rounded-lg p-4">
 
-        <h2 class="text-xl font-bold text-fuchsia-600 dark:text-fuchsia-400">Appointment with Dr. <%= appointment.doctor.full_name %></h2>
+        <h2 class="text-xl font-bold text-fuchsia-600 dark:text-fuchsia-400">Appointment with
+          Dr. <%= appointment.doctor.full_name %></h2>
 
         <p class="text-sm text-gray-500 dark:text-gray-400">Description: <%= appointment.description %></p>
 
@@ -25,5 +58,7 @@
         <% end %>
 
       </div>
-
     <% end %>
+  <% end %>
+</div>
+
