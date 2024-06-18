@@ -1,28 +1,64 @@
-<div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-fuchsia-200 border-dashed rounded-lg dark:border-fuchsia-700 mt-14">
-    <div>
-      <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Payments</h1>
-    </div>
-    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Here are the payments you have made.</p>
+<div>
+  <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Payments</h1>
+</div>
 
-    <h1>All Payments by <%= @patient.full_name %></h1>
+<h1 class="py-4">All Payments by <%= @patient.full_name %></h1>
 
-<table>
-  <tr>
-    <th>Treatment ID</th>
-    <th>Amount</th>
-    <th>Payment Method</th>
-    <th>Date</th>
-  </tr>
+<!--<table>-->
+<!--  <tr>-->
+<!--    <th>Treatment ID</th>-->
+<!--    <th>Amount</th>-->
+<!--    <th>Payment Method</th>-->
+<!--    <th>Date</th>-->
+<!--  </tr>-->
 
-  <% @payments.each do |payment| %>
+  <%# @payments.each do |payment| %>
+<!--    <tr>-->
+<!--      <td><%#= payment.treatment_id %></td>-->
+<!--      <td><%#= payment.amount %></td>-->
+<!--      <td><%#= payment.payment_method %></td>-->
+<!--      <td><%#= payment.date %></td>-->
+<!--    </tr>-->
+  <%# end %>
+<!--</table>-->
+
+
+
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
-      <td><%= payment.treatment_id %></td>
-      <td><%= payment.amount %></td>
-      <td><%= payment.payment_method %></td>
-      <td><%= payment.date %></td>
+      <th scope="col" class="px-6 py-3">
+        Invoice No.
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Method
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Date
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Price
+      </th>
     </tr>
-  <% end %>
-</table>
-  </div>
+    </thead>
+    <tbody>
+    <% @payments.each do |payment| %>
+    <tr class="bg-white dark:bg-gray-800">
+      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <%= payment.treatment_id %>
+      </th>
+      <td class="px-6 py-4">
+        <%= payment.payment_method %>
+      </td>
+      <td class="px-6 py-4">
+        <%= payment.date %>
+      </td>
+      <td class="px-6 py-4">
+        R <%= payment.amount %>
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>

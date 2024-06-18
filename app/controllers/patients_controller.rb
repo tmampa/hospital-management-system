@@ -7,10 +7,16 @@ class PatientsController < ApplicationController
 		else
 			@doctors = Doctor.all
 		end
+
+		@patient = current_patient
+
+		@appointments = current_patient.appointments.where.not(status: 'completed')
 	end
 
 	def appointments
 		@appointments = current_patient.appointments
+		@past_appointments = current_patient.appointments.where(status: 'completed')
+		@upcoming_appointments = current_patient.appointments.where.not(status: 'completed')
 	end
 
 	def treatments
